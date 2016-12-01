@@ -1,6 +1,8 @@
 Ansible Role - xCAT Repository
 ==============================
 
+[![Build Status](https://travis-ci.org/idiv-biodiversity/ansible-role-repo-xcat.svg?branch=master)](https://travis-ci.org/idiv-biodiversity/ansible-role-repo-xcat)
+
 Installs [xCAT][] package repository.
 
 Requirements
