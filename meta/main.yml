@@ -1,0 +1,25 @@
+---
+
+galaxy_info:
+  author: Christian Krause
+  description: xCAT repository for RHEL / CentOS
+  company: German Centre for Integrative Biodiversity Research (iDiv)
+  license: MIT
+  min_ansible_version: 1.2
+
+  platforms:
+    - name: EL
+      versions:
+        - all
+        - 5
+        - 6
+        - 7
+
+  galaxy_tags:
+    - xcat
+    - repo
+    - repository
+    - rhel
+    - centos
+
+...
