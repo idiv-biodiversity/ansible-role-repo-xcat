@@ -1,9 +1,8 @@
 ---
 
-- name: update apt cache
+- name: add https support for apt
   apt:
     name: apt-transport-https
-    update_cache: yes
 
 - name: install xCAT core repo
   apt_repository:
