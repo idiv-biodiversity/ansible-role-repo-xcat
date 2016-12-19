@@ -52,6 +52,7 @@ script:
     fi
   - |
     if [ ${IMAGE} = "ubuntu" ] ; then
+      docker exec $(cat ${container_id}) apt-get update
       docker exec $(cat ${container_id}) apt-get install -y xcat
     fi
 
