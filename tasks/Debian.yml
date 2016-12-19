@@ -1,9 +1,5 @@
 ---
 
-- name: add https support for apt
-  apt:
-    name: apt-transport-https
-
 - name: install xCAT core repo
   apt_repository:
     repo: "deb [arch=amd64] {{ xcat_repo_core_url }} trusty main"
