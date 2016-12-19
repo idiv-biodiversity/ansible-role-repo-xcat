@@ -1,5 +1,10 @@
 ---
 
+- name: update apt cache
+  apt:
+    name: apt-transport-https
+    update_cache: yes
+
 - name: install xCAT core repo
   apt_repository:
     repo: "deb [arch=amd64] {{ xcat_repo_core_url }} trusty main"
