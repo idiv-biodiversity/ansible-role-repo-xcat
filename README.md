@@ -8,7 +8,10 @@ Installs [xCAT][] package repository.
 Requirements
 ------------
 
-Currently supports only RHEL/CentOS.
+Supports:
+
+- RHEL / CentOS
+- Ubuntu
 
 Role Variables
 --------------
