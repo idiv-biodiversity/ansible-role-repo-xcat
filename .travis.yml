@@ -4,56 +4,51 @@ services: docker
 
 env:
   - distro: centos7
-    IMAGE: centos
     init: /usr/lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - distro: centos6
-    IMAGE: centos
     init: /sbin/init
     run_opts: ""
   - distro: ubuntu1604
-    IMAGE: ubuntu
     init: /lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - distro: ubuntu1404
-    IMAGE: ubuntu
     init: /sbin/init
     run_opts: ""
   - distro: ubuntu1204
-    IMAGE: ubuntu
     init: /sbin/init
     run_opts: ""
 
 before_install:
-  - 'docker pull geerlingguy/docker-${distro}-ansible:latest'
+  - 'docker pull geerlingguy/docker-$distro-ansible:latest'
 
 script:
   - container_id=$(mktemp)
 
-  - 'docker run --detach --volume="${PWD}":/etc/ansible/roles/repo-xcat:ro ${run_opts} geerlingguy/docker-${distro}-ansible:latest "${init}" > "${container_id}"'
+  - 'docker run --detach --volume="$PWD":/etc/ansible/roles/repo-xcat:ro $run_opts geerlingguy/docker-$distro-ansible:latest "$init" > "$container_id"'
 
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible localhost -m setup'
+  - 'docker exec --tty "$(cat $container_id)" env TERM=xterm ansible localhost -m setup'
 
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/repo-xcat/tests/test.yml --syntax-check'
+  - 'docker exec --tty "$(cat $container_id)" env TERM=xterm ansible-playbook /etc/ansible/roles/repo-xcat/tests/test.yml --syntax-check'
 
-  - 'docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/repo-xcat/tests/test.yml'
+  - 'docker exec "$(cat $container_id)" ansible-playbook /etc/ansible/roles/repo-xcat/tests/test.yml'
 
   - idempotence=$(mktemp)
-  - docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/repo-xcat/tests/test.yml | tee -a ${idempotence}
+  - docker exec "$(cat $container_id)" ansible-playbook /etc/ansible/roles/repo-xcat/tests/test.yml | tee -a $idempotence
   - >
-    tail ${idempotence}
+    tail $idempotence
     | grep -q 'changed=0.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
+    && (echo 'idempotence test: pass' && exit 0)
+    || (echo 'idempotence test: fail' && exit 1)
 
   - |
-    if [ ${IMAGE} = "centos" ]; then
-      docker exec $(cat ${container_id}) yum -y install xCAT
+    if [[ $distro =~ "centos" ]] ; then
+      docker exec $(cat $container_id) yum -y install xCAT
     fi
   - |
-    if [ ${IMAGE} = "ubuntu" ] ; then
-      docker exec $(cat ${container_id}) apt-get update
-      docker exec $(cat ${container_id}) apt-get install -y xcat
+    if [[ $distro =~ "ubuntu" ]] ; then
+      docker exec $(cat $container_id) apt-get update
+      docker exec $(cat $container_id) apt-get install -y xcat
     fi
 
 notifications:
