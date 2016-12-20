@@ -1,0 +1,9 @@
+---
+
+xcat_repo_core_url: "http://xcat.org/files/xcat/repos/apt/{{ xcat_version }}/xcat-core/"
+
+xcat_repo_dep_url: "http://xcat.org/files/xcat/repos/apt/xcat-dep/"
+
+xcat_repo_apt_key: "http://xcat.org/files/xcat/repos/apt/apt.key"
+
+...

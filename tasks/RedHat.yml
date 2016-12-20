@@ -1,0 +1,21 @@
+---
+
+- name: install xCAT core repo
+  yum_repository:
+    name: xcat-core
+    description: xCAT core packages
+    baseurl: "{{ xcat_repo_core_url }}"
+    gpgcheck: yes
+    gpgkey: "{{ xcat_repo_core_gpg_key_url }}"
+    state: present
+
+- name: install xCAT dependency repo
+  yum_repository:
+    name: xcat-dep
+    description: xCAT dependency packages
+    baseurl: "{{ xcat_repo_dep_url }}"
+    gpgcheck: yes
+    gpgkey: "{{ xcat_repo_dep_gpg_key_url }}"
+    state: present
+
+...

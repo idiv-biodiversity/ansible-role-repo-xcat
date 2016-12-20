@@ -1,0 +1,18 @@
+---
+
+- name: install xCAT core repo
+  apt_repository:
+    repo: "deb [arch=amd64] {{ xcat_repo_core_url }} trusty main"
+    state: present
+
+- name: install xCAT dependency repo
+  apt_repository:
+    repo: "deb [arch=amd64] {{ xcat_repo_dep_url }} trusty main"
+    state: present
+
+- name: install xCAT repo apt key
+  apt_key:
+    url: "{{ xcat_repo_apt_key }}"
+    state: present
+
+...
