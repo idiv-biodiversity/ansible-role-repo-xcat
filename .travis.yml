@@ -15,9 +15,6 @@ env:
   - distro: ubuntu1404
     init: /sbin/init
     run_opts: ""
-  - distro: ubuntu1204
-    init: /sbin/init
-    run_opts: ""
 
 before_install:
   - 'docker pull geerlingguy/docker-$distro-ansible:latest'
