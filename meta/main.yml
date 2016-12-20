@@ -16,7 +16,6 @@ galaxy_info:
         - 7
     - name: Ubuntu
       versions:
-        - precise
         - trusty
         - xenial
 
@@ -26,5 +25,6 @@ galaxy_info:
     - repository
     - rhel
     - centos
+    - ubuntu
 
 ...
