@@ -2,12 +2,12 @@
 
 - name: install xCAT core repo
   apt_repository:
-    repo: "deb [arch=amd64] {{ xcat_repo_core_url }} trusty main"
+    repo: "deb [arch=amd64] {{ xcat_repo_core_url }} {{ ansible_distribution_release }} main"
     state: present
 
 - name: install xCAT dependency repo
   apt_repository:
-    repo: "deb [arch=amd64] {{ xcat_repo_dep_url }} trusty main"
+    repo: "deb [arch=amd64] {{ xcat_repo_dep_url }} {{ ansible_distribution_release }} main"
     state: present
 
 - name: install xCAT repo apt key
