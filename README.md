@@ -34,7 +34,9 @@ Example Playbook
   vars:
     xcat_version: "2.10"
   roles:
-    - { role: repo-xcat, tags: ['xcat'] }
+    - role: repo-xcat
+      tags:
+        - xcat
 ```
 
 License
