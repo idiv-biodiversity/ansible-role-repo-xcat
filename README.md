@@ -5,6 +5,22 @@ Ansible Role - xCAT Repository
 
 Installs [xCAT][] package repository.
 
+Table of Contents
+-----------------
+
+<!-- toc -->
+
+- [Requirements](#requirements)
+- [Role Variables](#role-variables)
+- [Dependencies](#dependencies)
+- [Example Playbook](#example-playbook)
+  * [Top-Level Playbook](#top-level-playbook)
+  * [Role Dependency](#role-dependency)
+- [License](#license)
+- [Author Information](#author-information)
+
+<!-- tocstop -->
+
 Requirements
 ------------
 
@@ -16,9 +32,11 @@ Supports:
 Role Variables
 --------------
 
--   **xcat_version**
+These are the used variables and their defaults:
 
-    default: *latest*
+```yml
+xcat_version: latest
+```
 
 Dependencies
 ------------
@@ -28,15 +46,55 @@ None.
 Example Playbook
 ----------------
 
+Add to `requirements.yml`:
+
 ```yml
-- name: xcat image provider
-  hosts: servers
+---
+
+- src: idiv-biodiversity.repo-xcat
+
+...
+```
+
+Download:
+
+```console
+$ ansible-galaxy install -r requirements.yml
+```
+
+### Top-Level Playbook
+
+Write a top-level playbook:
+
+```yml
+---
+
+- name: head server
+  hosts: head
   vars:
-    xcat_version: "2.10"
+    xcat_version: '2.10'
   roles:
-    - role: repo-xcat
+    - role: idiv-biodiversity.repo-xcat
       tags:
         - xcat
+
+...
+```
+
+### Role Dependency
+
+Define the role dependency in `meta/main.yml`:
+
+```yml
+---
+
+dependencies:
+
+  - role: idiv-biodiversity.repo-xcat
+    tags:
+      - xcat
+
+...
 ```
 
 License
