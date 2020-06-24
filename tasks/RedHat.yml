@@ -5,6 +5,7 @@
     name: xcat-core
     description: xCAT core packages
     baseurl: "{{ xcat_repo_core_url }}"
+    enabled: "{{ xcat_repo_enabled | ternary('yes', 'no') }}"
     gpgcheck: yes
     gpgkey: "{{ xcat_repo_core_gpg_key_url }}"
     state: present
@@ -14,6 +15,7 @@
     name: xcat-dep
     description: xCAT dependency packages
     baseurl: "{{ xcat_repo_dep_url }}"
+    enabled: "{{ xcat_repo_enabled | ternary('yes', 'no') }}"
     gpgcheck: yes
     gpgkey: "{{ xcat_repo_dep_gpg_key_url }}"
     state: present

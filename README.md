@@ -36,6 +36,9 @@ These are the used variables and their defaults:
 
 ```yml
 xcat_version: latest
+
+# whether to enable the repos
+xcat_repo_enabled: yes
 ```
 
 Dependencies
